@@ -234,7 +234,6 @@ def tamper():
         print("Decryption must NOT be performed.")
 
 while True:
-    print("\n========== HOSPITAL PRESCRIPTION SYSTEM ==========")
     print("1. Doctor")
     print("2. Pharmacist")
     print("3. Auditor")
