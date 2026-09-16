@@ -182,8 +182,6 @@ def pharmacist():
 
 # Auditor
 def auditor():
-    print("\n========== AUDITOR ==========")
-
     print("Ciphertext Hash:", encrypted_hash)
     print("RSA Encrypted AES Key:", rsa_encrypted_key)
     print("ElGamal Public Key:", (eg_p, eg_g, eg_y))
