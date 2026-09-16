@@ -218,6 +218,10 @@ def verify_integrity():
 def decrypt_file():
     global rsa_ciphertext
     global elgamal_ciphertext
+    
+    if not rsa_ciphertext or not elgamal_ciphertext:
+        return
+
 
     valid = verify_integrity()
 
