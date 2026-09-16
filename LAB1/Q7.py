@@ -9,60 +9,58 @@
 
 # HILL CIPHER
 
-def hill_encrypt(input_text):
-    text = ""
-    for ch in input_text.upper():
-        if ch.isalpha():
-            text += ch
-            
-    if len(text) % 2 != 0:
-        text += 'X'
-        
+K = [[3, 3], [2, 5]]
+
+def hill_encrypt(text):
+
+    text = text.upper().replace(" ", "")
+
+    while len(text) % 2 != 0:
+        text += "X"
+
     result = ""
-    
-    # key matrix example taken
-    a, b, c, d = 3, 3, 2, 7
-    
+
     for i in range(0, len(text), 2):
-        x = ord(text[i]) - ord('A')
-        y = ord(text[i+1]) - ord('A')
-        
-        # Matrix multiplication
-        first = (a * x + b * y) % 26
-        second = (c * x + d * y) % 26
-        
-        result += chr(first + ord('A'))
-        result += chr(second + ord('A'))
-        
-    return result 
 
-def hill_decrypt(ciphertext):
-    result = ""
+        x1 = ord(text[i]) - ord('A')
+        x2 = ord(text[i + 1]) - ord('A')
 
-    # Inverse key matrix
-    a = 23
-    b = 5
-    c = 12
-    d = 21
+        y1 = (K[0][0] * x1 + K[0][1] * x2) % 26
+        y2 = (K[1][0] * x1 + K[1][1] * x2) % 26
 
-    for i in range(0, len(ciphertext), 2):
-        x = ord(ciphertext[i]) - ord('A')
-        y = ord(ciphertext[i + 1]) - ord('A')
-
-        first = (a * x + b * y) % 26
-        second = (c * x + d * y) % 26
-
-        result += chr(first + ord('A'))
-        result += chr(second + ord('A'))
+        result += chr(y1 + ord('A'))
+        result += chr(y2 + ord('A'))
 
     return result
 
 
-ciphertext = input("Enter ciphertext: ")
+def hill_decrypt(text):
 
-plaintext = hill_decrypt(ciphertext)
+    det = K[0][0] * K[1][1] - K[0][1] * K[1][0]
+    det = det % 26
 
-print("Decrypted text:", plaintext)
+    det_inverse = pow(det, -1, 26)
+
+    inverse_matrix = [
+        [(K[1][1] * det_inverse) % 26, (-K[0][1] * det_inverse) % 26],
+        [(-K[1][0] * det_inverse) % 26, (K[0][0] * det_inverse) % 26]
+    ]
+
+    result = ""
+
+    for i in range(0, len(text), 2):
+
+        x1 = ord(text[i]) - ord('A')
+        x2 = ord(text[i + 1]) - ord('A')
+
+        y1 = (inverse_matrix[0][0] * x1 + inverse_matrix[0][1] * x2) % 26
+        y2 = (inverse_matrix[1][0] * x1 + inverse_matrix[1][1] * x2) % 26
+
+        result += chr(y1 + ord('A'))
+        result += chr(y2 + ord('A'))
+
+    return result
+
 
 input_text = input("Enter plaintext: ")
 
