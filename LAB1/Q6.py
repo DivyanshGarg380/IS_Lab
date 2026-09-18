@@ -19,6 +19,11 @@ def create_matrix(key):
         if ch.isalpha() and ch not in used:
             used += ch
             
+    # Append the rest of the alphabet
+    for ch in alphabet:
+        if ch not in used:
+            used += ch
+            
     matrix = []
     for i in range(0, 25, 5):
         matrix.append(list(used[i:i+5]))

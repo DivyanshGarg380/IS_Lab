@@ -72,6 +72,8 @@ def vigenere_encrypt(text, key):
             c = (p + k) % 26
             result += chr(c + ord('A'))
             key_idx += 1
+        else:
+            result += ch
             
     return result 
 
