@@ -247,7 +247,6 @@ def doctor_decrypt():
 
     print("Record not found.")
 
-
 # Nurse
 def nurse_view():
     for record in records:
