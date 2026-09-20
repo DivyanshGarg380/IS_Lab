@@ -43,21 +43,17 @@ import hashlib
 from datetime import datetime
 import os
 
-dh_p = 23
-dh_g = 5
+p = 23
+g = 5
+a = 6
+b = 15
+A = pow(g, a, p)
+B = pow(g, b, p)
 
-sender_private = 6
-receiver_private = 15
+s1 = pow(B, a, p)
+s2 = pow(A, b, p)
 
-sender_public = pow(dh_g, sender_private, dh_p)
-receiver_public = pow(dh_g, receiver_private, dh_p)
-
-shared_secret_sender = pow(receiver_public, sender_private, dh_p)
-shared_secret_receiver = pow(sender_public, receiver_private, dh_p)
-
-shared_secret = shared_secret_sender
-
-aes_key = hashlib.sha256(str(shared_secret).encode()).digest()
+aes_key = hashlib.sha256(str(s1).encode()).digest()
 
 nonce = b"12345678"
 
@@ -109,7 +105,7 @@ def sender():
         file.write("ReceiverAccess=" + str(receiver_access) + "\n")
 
     print("File encrypted successfully")
-    print("DH Shared Secret:", shared_secret)
+    print("DH Shared Secret:", s1)
     print("AES-256 Key:", aes_key.hex())
     print("SHA-256:", hash_value)
     print("ElGamal Signature:", r, s)
