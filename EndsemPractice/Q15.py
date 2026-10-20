@@ -9,7 +9,7 @@
 
 '''
     - A hospital stores patient reports securely. 
-    -The system must hash reports using SHA-256, encrypt them using DES-CBC, encrypt a numeric report code using RSA, sign the hash using ElGamal, and use Paillier to calculate the aggregate of encrypted report scores. 
+    - The system must hash reports using SHA-256, encrypt them using DES-CBC, encrypt a numeric report code using RSA, sign the hash using ElGamal, and use Paillier to calculate the aggregate of encrypted report scores. 
     - Implement a menu-driven program with basic RBAC and searchable encryption to locate reports by department.
 '''
 
