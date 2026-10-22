@@ -15,7 +15,7 @@
 
     Requirements:
     - Use TCP sockets.
-    - Use Diffie–Hellman with \(p=23,\ g=5,\ a=6,\ b=15\).
+    - Use Diffie–Hellman with p=23, g=5, a=6, b=15.
     - Derive a 256-bit AES key from the shared secret.
     - Only Client can submit readings.
     - Only Admin can view the server's audit log.
