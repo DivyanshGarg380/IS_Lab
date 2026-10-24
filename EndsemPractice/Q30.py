@@ -135,7 +135,7 @@ while True:
                 message = (report["id"] + "|" + report["classification"] + "|" + report["hash"]).encode()
                 hash_value = int.from_bytes(hashlib.sha256(message).digest(), "big") % n
                 
-                signature_ok = pow(report["signature"], e, n) == hash_val
+                signature_ok = pow(report["signature"], e, n) == hash_value
                 
                 if actual_hash == report["hash"] and signature_ok:
                     print("Integrity and RSA signature verified")
@@ -147,7 +147,7 @@ while True:
                 else:
                     print("Tampering detected. Decryption denied")
 
-            break 
+                break 
         
         if not found:
             print("Report not found or revoked")
