@@ -60,7 +60,7 @@ while True:
                 amount = int(input("Bill amount: "))
                 
                 cipher = AES.new(aes_key, AES.MODE_CBC, iv)
-                encrypted = cipher.encrypt(pad(department.encode()), 16)
+                encrypted = cipher.encrypt(pad(department.encode(), AES.block_size))
                 encrypted_amount = pub.encrypt(amount).ciphertext()
                 
                 
@@ -117,7 +117,7 @@ while True:
                     continue
 
                 cipher = AES.new(aes_key, AES.MODE_CBC, iv)
-                department = unpad(cipher.decrytpt(bytes.fromhex(record["cipher"])), 16).decode()
+                department = unpad(cipher.decrypt(bytes.fromhex(record["cipher"])), AES.block_size).decode()
                 
                 message = patient + "|" + department + "|" + str(record["amount"])
                 message = message.encode()
@@ -152,7 +152,7 @@ while True:
                     continue
 
                 cipher = AES.new(aes_key, AES.MODE_CBC, iv)
-                department = unpad(cipher.decrypt(bytes.fromhex(record["cipher"])), 16)
+                department = unpad(cipher.decrypt(bytes.fromhex(record["cipher"])), AES.block_size)
 
                 print("Department hex:", department.hex())
 
@@ -178,7 +178,7 @@ while True:
                 break
             
             cipher = AES.new(aes_key, AES.MODE_CBC, iv)
-            department = unpad(cipher.decrypt(bytes.fromhex(record["cipher"])), 16).decode()
+            department = unpad(cipher.decrypt(bytes.fromhex(record["cipher"])), AES.block_size).decode()
             message = patient + "|" + department + "|" + str(record["amount"])
             message = message.encode()
             
