@@ -10,7 +10,7 @@
 ## Endsem Practice Questions
 
 > Endsem content uploading under /EndsemPractice folder.   
-> Meanwhile to see all Pyq's , visit [LabXam](https://labxam.vercel.app)
+> Meanwhile to see all Pyq's , visit [LabXam](https://labxam.vercel.app)  
 > Endsem over, most questions were from this repo 🫡
 
 ## Ciao
